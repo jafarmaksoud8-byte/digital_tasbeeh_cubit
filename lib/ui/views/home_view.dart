@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasbeeh_app/bloc/tasbeeh_bloc.dart';
 import 'package:tasbeeh_app/constatnt/app_color.dart';
+import 'package:tasbeeh_app/cubit/tasbeeh_cubit.dart';
 import 'package:tasbeeh_app/ui/widgets/container_widget.dart';
 import 'package:tasbeeh_app/ui/widgets/text_widget.dart';
 
@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TasbeehBloc, TasbeehState>(
+    return BlocBuilder<TasbeehCubit, TasbeehState>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: AppColor.kPrimaryColor2,
@@ -20,12 +20,12 @@ class HomeView extends StatelessWidget {
               children: [
                 ContainerWidget(
                   onBack: () {
-                    context.read<TasbeehBloc>().add(PreviousTasbeehEvent());
+                    BlocProvider.of<TasbeehCubit>(context).previousZikr();
                   },
                   onForward: () {
-                    context.read<TasbeehBloc>().add(NextTasbeehEvent());
+                    BlocProvider.of<TasbeehCubit>(context).nextZikr();
                   },
-                  tasbeeh: context.read<TasbeehBloc>().tasbeeh,
+                  tasbeeh: BlocProvider.of<TasbeehCubit>(context).tasbeeh,
                   currentIndex: state.currentIndex,
                 ),
                 SizedBox(height: 20),
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 TextWidget(
-                  text: 'Round ${state.round}',
+                  text: 'Round ${state.round} ',
                   fontSize: 35,
                   fontWeight: FontWeight.w600,
                   color: AppColor.kPrimaryColor3,
@@ -54,7 +54,7 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        context.read<TasbeehBloc>().add(ResetCounterEvent());
+                        BlocProvider.of<TasbeehCubit>(context).reset();
                       },
                       child: TextWidget(
                         text: 'Reset',
@@ -68,7 +68,7 @@ class HomeView extends StatelessWidget {
                 SizedBox(height: 30),
                 InkWell(
                   onTap: () {
-                    context.read<TasbeehBloc>().add(IncrementCounterEvent());
+                    BlocProvider.of<TasbeehCubit>(context).increment();
                   },
                   child: CircleAvatar(
                     radius: 100,

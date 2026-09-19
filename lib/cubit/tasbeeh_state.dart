@@ -1,4 +1,4 @@
-part of 'tasbeeh_bloc.dart';
+part of 'tasbeeh_cubit.dart';
 
 @immutable
 sealed class TasbeehState {
@@ -17,8 +17,8 @@ final class TasbeehInitialState extends TasbeehState {
   const TasbeehInitialState() : super(currentIndex: 0, counter: 0, round: 0);
 }
 
-final class CounterChangedState extends TasbeehState {
-  const CounterChangedState({
+final class TasbeehChangedState extends TasbeehState {
+  const TasbeehChangedState({
     required super.currentIndex,
     required super.counter,
     required super.round,

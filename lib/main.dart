@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasbeeh_app/bloc/tasbeeh_bloc.dart';
+import 'package:tasbeeh_app/cubit/tasbeeh_cubit.dart';
 import 'package:tasbeeh_app/ui/views/home_view.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TasbeehBloc(),
+      create: (context) => TasbeehCubit(),
       child: MaterialApp(home: HomeView()),
     );
   }
